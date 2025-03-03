@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import {
   Table,
@@ -8,30 +8,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Trash } from "lucide-react";
-
-const allUsers = [
-  { userName: "John Doe", email: "john.doe@example.com", userRole: "Customer", status: "Active" },
-  { userName: "Emma Smith", email: "emma.smith@example.com", userRole: "Owner", status: "Inactive" },
-  { userName: "Alice Ben Johnson", email: "alice.j@example.com", userRole: "Admin", status: "Active" },
-  { userName: "Michael Brown", email: "michael.b@example.com", userRole: "Customer", status: "Inactive" },
-];
+import { Loader } from "lucide-react";
+import { useAllUsersQuery } from "@/redux/features/auth/authApi";
+import { TUser } from "@/types/common";
+import TableRows from "./components/TableRow";
 
 const ManageUsers = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRole, setSelectedRole] = useState("All");
-
-  const filteredUsers = allUsers.filter((user) => {
-    const matchesSearch = user.userName.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesRole = selectedRole === "All" || user.userRole === selectedRole;
-    return matchesSearch && matchesRole;
+  const [selectedRole, setSelectedRole] = useState("");
+  const { data: AllUsers } = useAllUsersQuery({
+    searchQuery,
+    selectedRole,
   });
 
  
   return (
-    <div className="w-full mx-auto"> 
-    <h1 className="font-medium">Welcome Back, User Name!</h1>
-    <p className="pb-6">Manage Users</p>
+    <div className="w-full mx-auto">
+      <h1 className="font-medium">Welcome Back, User Name!</h1>
+      <p className="pb-6">Manage Users</p>
       <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
         <input
           type="text"
@@ -45,10 +39,9 @@ const ManageUsers = () => {
           value={selectedRole}
           onChange={(e) => setSelectedRole(e.target.value)}
         >
-          <option value="All">All Roles</option>
-          <option value="Admin">Admin</option>
-          <option value="Owner">Owner</option>
-          <option value="Customer">Customer</option>
+          <option value="">All Roles</option>
+          <option value="ADMIN">Admin</option>
+          <option value="USER">User</option>
         </select>
       </div>
       <Table>
@@ -62,24 +55,14 @@ const ManageUsers = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredUsers.length > 0 ? (
-            filteredUsers.map((user) => (
-              <TableRow key={user.userName}>
-                <TableCell>{user.userName}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.userRole}</TableCell>
-                <TableCell className={user.status === "Active" ? "text-green-600" : "text-red-600"}>
-                  {user.status}
-                </TableCell>
-                <TableCell className="flex items-center gap-3">               
-                  <Trash className="cursor-pointer text-red-500" />
-                </TableCell>
-              </TableRow>
+          {AllUsers?.result?.length > 0 ? (
+            AllUsers?.result?.map((user: TUser) => (
+              <TableRows key={user.id} user={user}></TableRows>
             ))
           ) : (
             <TableRow>
               <TableCell colSpan={5} className="text-center py-4 text-gray-500">
-                No users found
+                <Loader className="animate-spin mx-auto w-24 h-24  text-red-500" />
               </TableCell>
             </TableRow>
           )}

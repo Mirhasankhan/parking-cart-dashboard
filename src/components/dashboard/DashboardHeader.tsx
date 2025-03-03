@@ -5,11 +5,14 @@ import UserDetails from "./UserDetails";
 import { useState } from "react";
 import DashboardSearch from "./DashboardSearch";
 import DashboardNotifications from "./DashboardNotifications";
+import { useAppSelector } from "@/redux/hooks";
+import { useCurrentUser } from "@/redux/features/auth/authSlice";
 
 const DashboardHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const user = useAppSelector(useCurrentUser)
   return (
     <div className="flex justify-between w-full md:px-8 px-4 items-center">
       {/* <h1 className="font-semibold hidden md:block">Welcome Back User</h1> */}
@@ -43,8 +46,8 @@ const DashboardHeader = () => {
             alt="Profile Picture"
           />
           <div className="text-sm hidden md:block">
-            <h1 className="font-semibold">User Name</h1>
-            <p>Admin</p>
+            <h1 className="font-semibold">{user?.name}</h1>
+            <p>{user?.role}</p>
           </div>
           {isOpen && <ChevronUp />}
           {!isOpen && <ChevronDown />}
