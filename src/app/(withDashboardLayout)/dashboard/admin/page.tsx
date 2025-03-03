@@ -1,3 +1,4 @@
+import CancelationRate from "./components/CancelationRate";
 import RecentBookings from "./components/RecentBookings";
 import RevenueDetails from "./components/RevenueDetail";
 import TopCustomers from "./components/TopCustomers";
@@ -20,6 +21,7 @@ const OverView = () => {
           </div>
         </div>
         <div className="col-span-4 md:col-span-1">
+          <CancelationRate></CancelationRate>
           <RecentBookings></RecentBookings>
           <TopCustomers></TopCustomers>
         </div>

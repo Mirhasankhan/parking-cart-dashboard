@@ -8,8 +8,7 @@ import { LuTableProperties } from "react-icons/lu";
 import { FcSalesPerformance } from "react-icons/fc";
 import {
   UserRound,
-  LandPlot,  
-  ChartNoAxesCombined,
+  LandPlot,
   MessageCirclePlus,
   LayoutDashboard,
 } from "lucide-react";
@@ -28,16 +27,11 @@ export const sidebarItems = (role: TRoles): SidbarItem[] => {
         title: "Manage Users",
         path: `/manage-users`,
         icon: LandPlot,
-      });    
+      });
       roleMenus.push({
         title: "Reviews & Feedback",
         path: `/reviews-feedback`,
         icon: MessageCirclePlus,
-      });
-      roleMenus.push({
-        title: "Reports & Analytics",
-        path: `/reports-analytics`,
-        icon: ChartNoAxesCombined,
       });
 
       roleMenus.push({

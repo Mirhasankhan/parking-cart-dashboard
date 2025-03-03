@@ -5,6 +5,7 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { LayoutDashboard, Webcam, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import Providers from "@/lib/providers/Providers";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +45,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             </button>
             <DashboardHeader></DashboardHeader>
           </div>
-          <div className="p-4">{children}</div>
+          {/* <div className="p-4">{children}</div> */}
+          <Providers>
+            <div className="p-4">{children}</div>
+          </Providers>
         </div>
       </div>
     </div>
