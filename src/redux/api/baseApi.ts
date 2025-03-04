@@ -7,13 +7,13 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5009/api/v1/",
     prepareHeaders: (headers) => {
-      const token = JWTDecode();
+      const {token} = JWTDecode()
       if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.set("Authorization", `${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ["users"],
+  tagTypes: ["users","bookings"],
   endpoints: () => ({}),
 });

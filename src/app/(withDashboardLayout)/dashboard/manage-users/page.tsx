@@ -20,6 +20,7 @@ const ManageUsers = () => {
     searchQuery,
     selectedRole,
   });
+  
 
  
   return (
@@ -62,7 +63,7 @@ const ManageUsers = () => {
           ) : (
             <TableRow>
               <TableCell colSpan={5} className="text-center py-4 text-gray-500">
-                <Loader className="animate-spin mx-auto w-24 h-24  text-red-500" />
+                <Loader size={80} className="animate-spin mx-auto  text-red-500" />
               </TableCell>
             </TableRow>
           )}

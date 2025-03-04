@@ -8,10 +8,13 @@ import TopOwners from "./components/TopOwners";
 import TopSpots from "./components/TopSpots";
 import TotalUsers from "./components/users";
 import { useCurrentUser } from "@/redux/features/auth/authSlice";
+import { JWTDecode } from "@/utils/jwt";
+
 
 const OverView = () => {
    const user = useAppSelector(useCurrentUser);
-
+const {token} = JWTDecode()
+console.log(token)
   return (
     <div>
       <h1 className="font-medium">Welcome Back, {user?.name}</h1>
