@@ -13,22 +13,27 @@ export interface SidbarItem {
 }
 
 export interface TUser {
-  id:string
+  id: string;
   userName: string;
   role: string;
   status: string;
   email: string;
 }
 
-export interface Review  {
+export interface Review {
   rating: string;
   comment: string;
-};
+}
 
-export interface Spot  {
+export interface Spot {
   id: number;
   name: string;
   location: string;
   rating: number;
   reviews: Review[];
-};
+}
+
+export interface TLoginValues {
+  email: string;
+  password: string;
+}
